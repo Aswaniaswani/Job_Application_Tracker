@@ -1,0 +1,68 @@
+{% extends 'dashboard_base.html' %}
+{% block dashboard_content %}
+
+<h3>Apply for {{ job.title }}</h3>
+<p>{{ job.description }}</p>
+{% if not job.experience_required or profile.is_experienced %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input class="form-control mb-2"
+           name="name"
+           placeholder="Name"
+           value="{{ request.user.username }}"
+           required>
+
+    <input class="form-control mb-2"
+           name="email"
+           value="{{ request.user.email }}"
+           placeholder="Email"
+           required>
+
+    <label class="form-label">Upload / Update Resume</label>
+    <input class="form-control mb-2" type="file" name="resume">
+
+    {% if profile.resume %}
+        <p class="text-muted">
+            Current Resume:
+            <a href="{{ profile.resume.url }}" target="_blank">View</a>
+        </p>
+    {% endif %}
+
+    {% if job.experience_required and profile.is_experienced %}
+    <div class="card mt-3">
+        <div class="card-body">
+            <h6>Experience Details</h6>
+
+            <div class="mb-2">
+                <label>Current Company</label>
+                <input class="form-control"
+                       type="text"
+                       name="current_company"
+                       required>
+            </div>
+
+            <div class="mb-2">
+                <label>Current Salary</label>
+                <input class="form-control"
+                       type="number"
+                       name="current_salary"
+                       required>
+            </div>
+
+            <div class="mb-2">
+                <label>Expected Salary</label>
+                <input class="form-control"
+                       type="number"
+                       name="expected_salary"
+                       required>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <button class="btn btn-success mt-3">Apply Job</button>
+</form>
+{% endif %}
+
+{% endblock %}

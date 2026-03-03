@@ -1,0 +1,32 @@
+{% extends 'dashboard_base.html' %}
+{% block dashboard_content %}
+
+<h3>All Jobs</h3>
+
+<table class="table table-bordered table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Recruiter</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    {% for job in jobs %}
+    <tr>
+        <td>{{ job.title }}</td>
+        <td>{{ job.recruiter.username }}</td>
+        <td>{{ job.location }}</td>
+        <td>
+            {% if job.status %}
+                <span class="badge bg-success">Active</span>
+            {% else %}
+                <span class="badge bg-secondary">Closed</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

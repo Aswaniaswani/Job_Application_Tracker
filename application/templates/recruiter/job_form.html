@@ -1,0 +1,67 @@
+{% extends "dashboard_base.html" %}
+
+{% block dashboard_content %}
+<h3>{% if job %}Edit Job{% else %}Create Job{% endif %}</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <input class="form-control mb-2"
+           name="title"
+           placeholder="Job Title"
+           value="{{ job.title|default:'' }}">
+
+    <textarea class="form-control mb-2"
+              name="description"
+              placeholder="Description">{{ job.description|default:'' }}</textarea>
+
+    <input class="form-control mb-2"
+           name="location"
+           placeholder="Location"
+           value="{{ job.location|default:'' }}">
+
+    <!-- 🔹 Experience Required -->
+    <div class="form-check mb-2">
+        <input class="form-check-input"
+               type="checkbox"
+               name="experience_required"
+               id="experienceCheck"
+               {% if job and job.experience_required %}checked{% endif %}>
+        <label class="form-check-label" for="experienceCheck">
+            Relevant Experience Required
+        </label>
+    </div>
+
+    <!-- 🔹 Minimum Experience -->
+    <div class="mb-3" id="experienceField" style="display:none;">
+        <input class="form-control"
+               type="number"
+               name="min_experience"
+               placeholder="Minimum Years of Experience"
+               value="{{ job.min_experience|default:'' }}">
+    </div>
+
+    <select class="form-control mb-3" name="status">
+        <option value="open" {% if job.status == 'open' %}selected{% endif %}>Open</option>
+        <option value="closed" {% if job.status == 'closed' %}selected{% endif %}>Closed</option>
+    </select>
+
+    <button class="btn btn-success">
+        {% if job %}Update{% else %}Create{% endif %}
+    </button>
+</form>
+
+<!-- 🔹 JavaScript -->
+<script>
+    const checkbox = document.getElementById('experienceCheck');
+    const field = document.getElementById('experienceField');
+
+    function toggleExperience() {
+        field.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    checkbox.addEventListener('change', toggleExperience);
+    toggleExperience();  // run on page load
+</script>
+
+{% endblock %}

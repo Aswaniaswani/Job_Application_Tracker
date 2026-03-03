@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-6 mx-auto card p-4 shadow">
+    <h3 class="text-center mb-3">Register</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Phone:
+    <input class="form-control mb-2" type="text" name="phone"  required>
+
+    Resume:
+    <input class="form-control mb-2" type="file" name="resume" required>
+
+    <div class="form-check mb-2">
+    <input class="form-check-input"
+           type="checkbox"
+           name="is_experienced"
+           id="is_experienced"
+           {% if profile.is_experienced %}checked{% endif %}>
+    <label class="form-check-label" for="is_experienced">
+        I am an experienced candidate
+    </label>
+</div>
+    <button class="btn btn-primary w-100" type="submit">Complete Registration</button>
+</form>
+</div>
+{% endblock %}

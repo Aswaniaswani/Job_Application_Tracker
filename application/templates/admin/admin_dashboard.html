@@ -1,0 +1,50 @@
+{% extends 'dashboard_base.html' %}
+{% block dashboard_content %}
+
+<h3>Admin Dashboard</h3>
+
+<div class="row g-4 mt-2">
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h4>{{ total_users }}</h4>
+                <p>Total Users</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h4>{{ recruiters }}</h4>
+                <p>Recruiters</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h4>{{ candidates }}</h4>
+                <p>Candidates</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h4>{{ total_applications }}</h4>
+                <p>Applications</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<a href="{% url 'admin_users' %}" class="btn btn-secondary">Users</a>
+<a href="{% url 'admin_jobs' %}" class="btn btn-primary">Jobs</a>
+<a href="{% url 'admin_applications' %}" class="btn btn-dark">Applications</a>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "dashboard_base.html" %}
+
+{% block dashboard_content %}
+
+<h3>My Jobs</h3>
+<a href="{% url 'create_job' %}" class="btn btn-primary mb-3">Create Job</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for job in jobs %}
+    <tr>
+        <td>{{ job.title }}</td>
+        <td>{{ job.status }}</td>
+        <td>
+            <a href="{% url 'edit_job' job.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'delete_job' job.id %}" class="btn btn-sm btn-danger">Delete</a>
+            <a href="{% url 'recruiter_applications' job.id %}" class="btn btn-sm btn-info">Applications</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No jobs posted</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

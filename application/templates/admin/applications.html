@@ -1,0 +1,33 @@
+{% extends 'dashboard_base.html' %}
+{% block dashboard_content %}
+
+<h3>All Applications</h3>
+
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Candidate</th>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Resume</th>
+        </tr>
+    </thead>
+
+    {% for app in applications %}
+    <tr>
+        <td>{{ app.candidate.username }}</td>
+        <td>{{ app.job.title }}</td>
+        <td>
+            <span class="badge bg-info">{{ app.status }}</span>
+        </td>
+        <td>
+            <a href="{{ app.resume.url }}" target="_blank"
+               class="btn btn-sm btn-outline-primary">
+                View Resume
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

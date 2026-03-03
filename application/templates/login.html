@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="text-center mb-4">Login</h4>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <a href="{% url 'forgot_password' %}" style="float:right;margin-right:20px;">Forgot Password?</a><br><br>
+
+                    <button class="btn btn-primary w-100">Login</button>
+                </form>
+
+                <p class="text-center mt-3">
+                   <small>
+                    Don’t have an account?
+                    <a href="{% url 'register' %}">Register</a>
+                </small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
